@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chang Yim Post-Project Survey Analysis</title>
+<title>Chang Yim Pre-Post Retrospective Evaluation Survey</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,7 +44,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid #e5e7e0;
   }
   .card h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: #333; }
-  .card canvas { width: 100% !important; }
+  .card canvas { width: 100% !important; height: 100% !important; max-height: 400px; }
 
   .change-table { width: 100%; border-collapse: collapse; font-size: 14px; }
   .change-table th { text-align: left; padding: 10px 12px; border-bottom: 2px solid #e0e0e0; color: #555; font-weight: 600; font-size: 12px; text-transform: uppercase; }
@@ -72,6 +72,36 @@
     text-align: center; padding: 32px; color: #888; font-size: 12px;
     border-top: 1px solid #ddd; margin-top: 24px;
   }
+
+  
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 0 24px;
+  }
+  .nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-bar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    padding: 12px 0;
+    display: inline-block;
+  }
+  .nav-bar a:hover {
+    color: #3D7B3F;
+  }
+
 </style>
 </head>
 <body>
@@ -80,9 +110,21 @@
   <div class="header-content">
     <img src="data:image/png;base64,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" alt="ZSL" class="header-logo">
     <div class="header-text">
-      <h1>Chang Yim Cooperative: Post-Project Survey Results</h1>
+      <h1>Chang Yim Cooperative: Pre-Post Retrospective Evaluation</h1>
       <p>Capacity and Wellbeing Assessment with Gender and Exposure Disaggregation &middot; 37 Respondents &middot; Kanchanaburi, Thailand &middot; 2026</p>
     </div>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-content">
+    <a href="#demographics">Demographics</a>
+    <a href="#training">Training</a>
+    <a href="#capacity">Capacity</a>
+    <a href="#wellbeing">Wellbeing</a>
+    <a href="#hec">HEC Attitudes</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#darwin-mapping">Darwin Mapping</a>
   </div>
 </div>
 
@@ -115,10 +157,35 @@
     <div class="label">Will Continue</div>
     <div class="sub">36 of 37 respondents</div>
   </div>
+
+<!-- OUTCOME KPIs -->
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="value" style="color: #D4960A;">+1.82</div>
+    <div class="label">Mean Capacity Gain</div>
+    <div class="sub">9 skills, 5-pt scale</div>
+  </div>
+  <div class="kpi">
+    <div class="value" style="color: #D4960A;">+1.02</div>
+    <div class="label">Mean Wellbeing Gain</div>
+    <div class="sub">9 indicators, 5-pt scale</div>
+  </div>
+  <div class="kpi">
+    <div class="value" style="color: #D4960A;">+0.34</div>
+    <div class="label">Mean HEC Attitude Gain</div>
+    <div class="sub">7 items, 5-pt scale</div>
+  </div>
+</div>
+
+</div>
+
+<!-- METHODOLOGY NOTE -->
+<div class="insight-box" style="border-color: #666;">
+  <strong>Methodology:</strong> Results are from a retrospective pre-post evaluation (n=37, March 2026). Respondents self-rated "before the project" and "now" in a single session on a 1–5 scale. This design is practical for field settings but carries recall bias risk. There is no control group. The male subsample (n=10) limits the reliability of gender comparisons; these are reported as descriptive patterns, not confirmed effects.
 </div>
 
 <!-- SECTION A: DEMOGRAPHICS & PRODUCTION -->
-<h2 class="section-title">A. Demographics &amp; Coffee Production</h2>
+<h2 class="section-title" id="demographics">A. Demographics &amp; Coffee Production</h2>
 
 <div class="grid-2">
   <div class="card">
@@ -148,14 +215,14 @@
 </div>
 
 <!-- SECTION: TRAINING -->
-<h2 class="section-title">Training Participation <span class="section-subtitle">% of 37 respondents who attended each activity</span></h2>
+<h2 class="section-title" id="training">Training Participation <span class="section-subtitle">% of 37 respondents who attended each activity</span></h2>
 
 <div class="card" style="margin-bottom:24px;">
   <canvas id="trainingChart" height="280"></canvas>
 </div>
 
 <!-- SECTION B: CAPACITY -->
-<h2 class="section-title">B. Capacity in Coffee Production &amp; Business <span class="section-subtitle">Self-rated 1&ndash;5 scale, Before vs. Now</span></h2>
+<h2 class="section-title" id="capacity">B. Capacity in Coffee Production &amp; Business <span class="section-subtitle">Self-rated 1&ndash;5 scale, Before vs. Now</span></h2>
 
 <div class="card" style="margin-bottom: 16px;">
   <canvas id="capacityChart" height="320"></canvas>
@@ -164,9 +231,26 @@
 <div class="card" style="margin-bottom:24px;">
   <h3>Capacity Change Detail</h3>
   <table class="change-table">
-    <thead><tr><th>Skill</th><th>Before</th><th>Now</th><th>Change</th></tr></thead>
-    <tbody id="capacityTable"></tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Before</th>
+      <th>Now</th>
+      <th style="color: #666;">Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Tree Care</td><td style="text-align: center;">2.0</td><td style="text-align: center;">3.78</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.78</td></tr>
+    <tr><td>Cherry Selection</td><td style="text-align: center;">1.95</td><td style="text-align: center;">4.05</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+2.11</td></tr>
+    <tr><td>Post-Harvest Processing</td><td style="text-align: center;">2.24</td><td style="text-align: center;">4.24</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+2.00</td></tr>
+    <tr><td>Quality Sorting</td><td style="text-align: center;">2.43</td><td style="text-align: center;">4.73</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+2.30</td></tr>
+    <tr><td>Roasting & Cupping</td><td style="text-align: center;">2.27</td><td style="text-align: center;">4.19</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.92</td></tr>
+    <tr><td>Quality vs. Price</td><td style="text-align: center;">2.35</td><td style="text-align: center;">4.14</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.79</td></tr>
+    <tr><td>Production Costs</td><td style="text-align: center;">2.24</td><td style="text-align: center;">3.84</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.60</td></tr>
+    <tr><td>Buyers & Markets</td><td style="text-align: center;">2.16</td><td style="text-align: center;">4.05</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.89</td></tr>
+    <tr><td>Record-Keeping</td><td style="text-align: center;">2.62</td><td style="text-align: center;">3.59</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.97</td></tr>
+  </tbody>
+</table>
 </div>
 
 <div class="insight-box">
@@ -193,7 +277,7 @@
 </div>
 
 <!-- SECTION C: WELLBEING -->
-<h2 class="section-title">C. Wellbeing <span class="section-subtitle">Self-rated 1&ndash;5 scale, Before vs. Now</span></h2>
+<h2 class="section-title" id="wellbeing">C. Wellbeing <span class="section-subtitle">Self-rated 1&ndash;5 scale, Before vs. Now</span></h2>
 
 <div class="card" style="margin-bottom: 16px;">
   <canvas id="wellbeingChart" height="300"></canvas>
@@ -202,9 +286,26 @@
 <div class="card" style="margin-bottom:24px;">
   <h3>Wellbeing Change Detail</h3>
   <table class="change-table">
-    <thead><tr><th>Indicator</th><th>Before</th><th>Now</th><th>Change</th></tr></thead>
-    <tbody id="wellbeingTable"></tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Wellbeing Indicator</th>
+      <th>Before</th>
+      <th>Now</th>
+      <th style="color: #666;">Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Satisfied with Income</td><td style="text-align: center;">2.89</td><td style="text-align: center;">4.16</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.27</td></tr>
+    <tr><td>Hopeful for Future</td><td style="text-align: center;">2.81</td><td style="text-align: center;">4.54</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.73</td></tr>
+    <tr><td>Income Needs</td><td style="text-align: center;">3.81</td><td style="text-align: center;">4.70</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.89</td></tr>
+    <tr><td>Save Money</td><td style="text-align: center;">4.05</td><td style="text-align: center;">4.75</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.70</td></tr>
+    <tr><td>Multiple Income</td><td style="text-align: center;">4.05</td><td style="text-align: center;">4.73</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.68</td></tr>
+    <tr><td>Connected to Community</td><td style="text-align: center;">2.89</td><td style="text-align: center;">4.16</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+1.27</td></tr>
+    <tr><td>Respected Member</td><td style="text-align: center;">3.46</td><td style="text-align: center;">4.38</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.92</td></tr>
+    <tr><td>Can Recover</td><td style="text-align: center;">3.38</td><td style="text-align: center;">4.33</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.95</td></tr>
+    <tr><td>Stable Life</td><td style="text-align: center;">3.43</td><td style="text-align: center;">4.24</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.81</td></tr>
+  </tbody>
+</table>
 </div>
 
 <div class="insight-box">
@@ -231,7 +332,7 @@
 </div>
 
 <!-- SECTION D: HUMAN-ELEPHANT CONFLICT -->
-<h2 class="section-title">D. Human-Elephant Conflict (HEC) Attitudes <span class="section-subtitle">Self-rated 1&ndash;5 scale, Before vs. Now</span></h2>
+<h2 class="section-title" id="hec">D. Human-Elephant Conflict (HEC) Attitudes <span class="section-subtitle">Self-rated 1&ndash;5 scale, Before vs. Now</span></h2>
 
 <div class="grid-2">
   <div class="card">
@@ -247,9 +348,24 @@
 <div class="card" style="margin: 20px 0;">
   <h3>HEC Attitude Detail</h3>
   <table class="change-table">
-    <thead><tr><th>Attitude</th><th>Before</th><th>Now</th><th>Change</th></tr></thead>
-    <tbody id="hecTable"></tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>HEC Attitude</th>
+      <th>Before</th>
+      <th>Now</th>
+      <th style="color: #666;">Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Safe from Elephants</td><td style="text-align: center;">3.54</td><td style="text-align: center;">4.46</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.92</td></tr>
+    <tr><td>Elephants Good for Ecosystem</td><td style="text-align: center;">4.54</td><td style="text-align: center;">4.68</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.14</td></tr>
+    <tr><td>Protect Crops</td><td style="text-align: center;">4.41</td><td style="text-align: center;">4.71</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.30</td></tr>
+    <tr><td>Trust Authorities</td><td style="text-align: center;">3.95</td><td style="text-align: center;">4.19</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.24</td></tr>
+    <tr><td>Adequate Support</td><td style="text-align: center;">3.30</td><td style="text-align: center;">3.62</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.32</td></tr>
+    <tr><td>Community Conservation</td><td style="text-align: center;">3.65</td><td style="text-align: center;">3.92</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.27</td></tr>
+    <tr><td>Parks Benefit</td><td style="text-align: center;">4.05</td><td style="text-align: center;">4.24</td><td style="color: #3D7B3F; text-align: center; font-weight: 600;">+0.19</td></tr>
+  </tbody>
+</table>
 </div>
 
 <div class="insight-box">
@@ -295,7 +411,7 @@
 </div>
 
 <!-- MOST VALUABLE BENEFITS -->
-<h2 class="section-title">E. Most Valuable Benefits <span class="section-subtitle">Respondents selected up to 3</span></h2>
+<h2 class="section-title" id="benefits">E. Most Valuable Benefits <span class="section-subtitle">Respondents selected up to 3</span></h2>
 
 <div class="card" style="margin-bottom:24px;">
   <canvas id="benefitsChart" height="280"></canvas>
@@ -307,8 +423,80 @@
 
 </div><!-- /container -->
 
+
+<!-- SECTION F: DARWIN INDICATOR MAPPING -->
+<h2 class="section-title" id="darwin-mapping">F. Darwin Indicator Mapping</h2>
+
+<table class="change-table">
+  <thead>
+    <tr>
+      <th>Indicator</th>
+      <th>Target</th>
+      <th>Status</th>
+      <th>Evidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DI-D03</td>
+      <td>10 coffee households report 30% income increase vs. Year 1 baseline</td>
+      <td style="background-color: #fff8e1; text-align: center; font-weight: 600;">Partial</td>
+      <td>9 paired comparisons: +114% mean increase. 8 of 9 exceed 30% threshold. Small sample, based on recall.</td>
+    </tr>
+    <tr>
+      <td>DI-A01</td>
+      <td>60 farmers (30% women, 30% IPLC) complete training by Year 3</td>
+      <td style="background-color: #e8f5e9; text-align: center; font-weight: 600;">On Track</td>
+      <td>37 from Chang Yim (of 60 target). All completed training. 95% participation in agroforestry/meetings.</td>
+    </tr>
+    <tr>
+      <td>DI-A04</td>
+      <td>10 farmers meet Fine Robusta quality standards (80 pts)</td>
+      <td style="background-color: #fff3e0; text-align: center; font-weight: 600;">On Hold</td>
+      <td>Independent cupping evaluation data to be provided by Ecoexist and will be reported separately.</td>
+    </tr>
+    <tr>
+      <td>Outcome 4</td>
+      <td>30 people demonstrate improved capacity in business and product development</td>
+      <td style="background-color: #e8f5e9; text-align: center; font-weight: 600;">Strong Evidence</td>
+      <td>Mean +1.82 across 9 skills (n=37). All items show meaningful improvement (+0.97 to +2.30).</td>
+    </tr>
+    <tr>
+      <td>Outcome 5</td>
+      <td>30 people demonstrate increased subjective and relational well-being</td>
+      <td style="background-color: #e8f5e9; text-align: center; font-weight: 600;">Strong Evidence</td>
+      <td>Mean +1.02 across 9 indicators (n=37). Hope for the future (+1.73) and community connection (+1.27) lead.</td>
+    </tr>
+    <tr>
+      <td>Outcome 6</td>
+      <td>30 people report improved attitudes toward elephants and protected areas</td>
+      <td style="background-color: #fff8e1; text-align: center; font-weight: 600;">Partial</td>
+      <td>All 7 HEC items improved at mean level, but gains on core items (elephant valuation, institutional trust) are small.</td>
+    </tr>
+    <tr>
+      <td>CN 0.4</td>
+      <td>Improved capacity of CBO members in business and product development</td>
+      <td style="background-color: #e8f5e9; text-align: center; font-weight: 600;">Strong Evidence</td>
+      <td>Directly maps to Section B. Mean +1.82 across 9 skills. Record-keeping (+0.97) is the outlier.</td>
+    </tr>
+    <tr>
+      <td>CN 0.5</td>
+      <td>Well-being per Woodhouse et al. (2015) domains</td>
+      <td style="background-color: #e8f5e9; text-align: center; font-weight: 600;">Strong Evidence</td>
+      <td>All domains improved. Subjective well-being gains strongest; financial well-being gains smallest.</td>
+    </tr>
+    <tr>
+      <td>CN 0.6</td>
+      <td>70% report improved attitudes toward elephants and protected areas</td>
+      <td style="background-color: #fff8e1; text-align: center; font-weight: 600;">Partial</td>
+      <td>Mean scores improved on all 7 items, but individual-level threshold data unavailable. 70% target needs operationalizing.</td>
+    </tr>
+  </tbody>
+</table>
+
+
 <div class="footer">
-  Chang Yim Cooperative Survey Analysis, 2026
+  <p>Chang Yim Cooperative Pre-Post Retrospective Evaluation Survey, April 2026 · ZSL Thailand / EcoExist Society · Darwin Initiative Grant 30-003</p>
 </div>
 
 <script>
@@ -341,6 +529,7 @@ new Chart(document.getElementById('ageChart'), {
     }]
   },
   options: {
+    maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
       y: { beginAtZero: true, title: { display: true, text: 'Count' } },
@@ -362,6 +551,7 @@ new Chart(document.getElementById('coffeeTypeChart'), {
     }]
   },
   options: {
+    maintainAspectRatio: false,
     plugins: {
       legend: { position: 'bottom', labels: { padding: 16 } }
     }
@@ -380,6 +570,7 @@ new Chart(document.getElementById('distanceChart'), {
     }]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: { display: false } },
     scales: { x: { beginAtZero: true, title: { display: true, text: 'Number of respondents' } } }
@@ -398,6 +589,7 @@ new Chart(document.getElementById('incomeChart'), {
     }]
   },
   options: {
+    maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
       y: { beginAtZero: true, title: { display: true, text: 'Count' } },
@@ -420,6 +612,7 @@ new Chart(document.getElementById('trainingChart'), {
     }]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: {
       legend: { display: false },
@@ -458,6 +651,7 @@ new Chart(document.getElementById('capacityChart'), {
     ]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: { position: 'top' } },
     scales: {
@@ -466,16 +660,16 @@ new Chart(document.getElementById('capacityChart'), {
   }
 });
 
-// Populate capacity table
+// Populate capacity table — change values hardcoded from report to avoid rounding artifacts
 const capacityTableBody = document.getElementById('capacityTable');
+const capacityReportChanges = ['+1.78', '+2.11', '+2.00', '+2.30', '+1.92', '+1.79', '+1.60', '+1.89', '+0.97'];
 capacityLabels.forEach((label, i) => {
-  const change = (capacityNow[i] - capacityBefore[i]).toFixed(2);
-  const cls = change > 0 ? 'change-pos' : change < 0 ? 'change-neg' : 'change-neutral';
+  const change = capacityReportChanges[i];
   capacityTableBody.innerHTML += `<tr>
     <td>${label}</td>
     <td>${capacityBefore[i].toFixed(2)}</td>
     <td><strong>${capacityNow[i].toFixed(2)}</strong></td>
-    <td><span class="change-badge ${cls}">${change > 0 ? '+' : ''}${change}</span></td>
+    <td><span class="change-badge change-pos">${change}</span></td>
   </tr>`;
 });
 
@@ -504,6 +698,7 @@ new Chart(document.getElementById('capacityGenderChart'), {
     ]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: { position: 'top' } },
     scales: {
@@ -560,6 +755,7 @@ new Chart(document.getElementById('wellbeingChart'), {
     ]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: { position: 'top' } },
     scales: {
@@ -568,16 +764,16 @@ new Chart(document.getElementById('wellbeingChart'), {
   }
 });
 
-// Populate wellbeing table
+// Populate wellbeing table — change values hardcoded from report
 const wellbeingTableBody = document.getElementById('wellbeingTable');
+const wellbeingReportChanges = ['+1.27', '+1.73', '+0.89', '+0.70', '+0.68', '+1.27', '+0.92', '+0.95', '+0.81'];
 wellbeingLabels.forEach((label, i) => {
-  const change = (wellbeingNow[i] - wellbeingBefore[i]).toFixed(2);
-  const cls = change > 0 ? 'change-pos' : change < 0 ? 'change-neg' : 'change-neutral';
+  const change = wellbeingReportChanges[i];
   wellbeingTableBody.innerHTML += `<tr>
     <td>${label}</td>
     <td>${wellbeingBefore[i].toFixed(2)}</td>
     <td><strong>${wellbeingNow[i].toFixed(2)}</strong></td>
-    <td><span class="change-badge ${cls}">${change > 0 ? '+' : ''}${change}</span></td>
+    <td><span class="change-badge change-pos">${change}</span></td>
   </tr>`;
 });
 
@@ -606,6 +802,7 @@ new Chart(document.getElementById('wellbeingGenderChart'), {
     ]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: { position: 'top' } },
     scales: {
@@ -650,6 +847,7 @@ new Chart(document.getElementById('elephantImpactChart'), {
     }]
   },
   options: {
+    maintainAspectRatio: false,
     plugins: {
       legend: { position: 'bottom' },
       title: { display: true, text: '65% affected by wild elephants', font: { size: 13 } }
@@ -680,21 +878,24 @@ new Chart(document.getElementById('hecChart'), {
     ]
   },
   options: {
+    maintainAspectRatio: false,
     scales: { r: { beginAtZero: true, max: 5, ticks: { stepSize: 1 } } },
     plugins: { legend: { position: 'bottom' } }
   }
 });
 
-// Populate HEC table
+// Populate HEC table — change values hardcoded from report
 const hecTableBody = document.getElementById('hecTable');
+const hecReportChanges = ['+0.92', '+0.14', '+0.30', '+0.24', '+0.32', '+0.27', '+0.19'];
 hecLabels.forEach((label, i) => {
-  const change = (hecNow[i] - hecBefore[i]).toFixed(2);
-  const cls = change > 0.1 ? 'change-pos' : change < -0.1 ? 'change-neg' : 'change-neutral';
+  const change = hecReportChanges[i];
+  const val = parseFloat(change);
+  const cls = val > 0.1 ? 'change-pos' : val < -0.1 ? 'change-neg' : 'change-neutral';
   hecTableBody.innerHTML += `<tr>
     <td>${label}</td>
     <td>${hecBefore[i].toFixed(2)}</td>
     <td><strong>${hecNow[i].toFixed(2)}</strong></td>
-    <td><span class="change-badge ${cls}">${change > 0 ? '+' : ''}${change}</span></td>
+    <td><span class="change-badge ${cls}">${change}</span></td>
   </tr>`;
 });
 
@@ -721,6 +922,7 @@ new Chart(document.getElementById('hecGenderChart'), {
     ]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: { position: 'top' } },
     scales: {
@@ -775,6 +977,7 @@ new Chart(document.getElementById('hecExposureChart'), {
     ]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: { position: 'top' } },
     scales: {
@@ -827,6 +1030,7 @@ new Chart(document.getElementById('benefitsChart'), {
     }]
   },
   options: {
+    maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: {
       legend: { display: false },
